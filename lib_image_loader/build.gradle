@@ -1,0 +1,31 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion this.rootProject.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion this.rootProject.android.minSdkVersion
+        targetSdkVersion this.rootProject.android.targetSdkVersion
+        versionCode this.rootProject.android.versionCode
+        versionName this.rootProject.android.versionName
+        multiDexEnabled this.rootProject.android.multiDexEnabled
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation this.rootProject.depsLibs.appcompat
+    //glide依赖库
+    implementation this.rootProject.depsLibs.glide
+    annotationProcessor this.rootProject.depsLibs.glidecompiler
+    //RxJava依赖库,不能用compileOnly
+    implementation this.rootProject.depsLibs.rxjava
+    implementation this.rootProject.depsLibs.rxandroid
+}

@@ -1,0 +1,62 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.alibaba.arouter'
+android {
+    compileSdkVersion this.rootProject.android.compileSdkVersion
+
+    defaultConfig {
+        applicationId this.rootProject.android.applicationId
+        minSdkVersion this.rootProject.android.minSdkVersion
+        targetSdkVersion this.rootProject.android.targetSdkVersion
+        versionCode this.rootProject.android.versionCode
+        versionName this.rootProject.android.versionName
+        multiDexEnabled this.rootProject.android.multiDexEnabled
+
+        //Arouter配置
+        javaCompileOptions{
+            annotationProcessorOptions{
+                arguments=[AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
+            }
+        }
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation this.rootProject.depsLibs.appcompat
+    implementation this.rootProject.depsLibs.rxjava
+    implementation this.rootProject.depsLibs.rxandroid
+    implementation this.rootProject.depsLibs.eventbus
+    implementation this.rootProject.depsLibs.recyclerview
+    implementation 'com.github.hackware1993:MagicIndicator:1.5.0'
+    implementation(rootProject.depsLibs.arouterapi) {
+        exclude group: 'com.android.support'
+    }
+    annotationProcessor rootProject.depsLibs.aroutercompiler
+
+
+
+
+    implementation project(path: ':lib_common_ui')
+    implementation project(path: ':lib_network')
+    implementation project(path: ':lib_image_loader')
+    implementation project(path: ':lib_audio')
+    implementation project(path: ':lib_share')
+    implementation project(path: ':lib_pullalive')
+    implementation project(path: ':lib_video')
+
+
+
+
+
+
+}

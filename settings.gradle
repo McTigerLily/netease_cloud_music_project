@@ -1,0 +1,10 @@
+include ':lib_pullalive'
+include ':lib_share'
+include ':lib_image_loader'
+include ':lib_network'
+include ':lib_common_ui'
+include ':lib_video'
+include ':lib_audio'
+include ':netease_cloud_music_module'
+include ':app'
+rootProject.name = "netease_cloud_music"
